@@ -9,6 +9,13 @@ body {
     background-color: black;
     color: white;
     font-family: fa;
-    font-size: 160px;
+    font-size: 80px;
     text-align: center;
+}
+
+#bear {
+    position: absolute;
+    left: 700px;
+    top: 30%;
+    /* transform: translateX(-50%); */
 }
