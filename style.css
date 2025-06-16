@@ -13,9 +13,12 @@ body {
     text-align: center;
 }
 
-#bear {
+#girl {
     position: absolute;
-    left: 700px;
-    top: 30%;
-    /* transform: translateX(-50%); */
+    left: 50%;
+    top: 10%;
+    height: 256px;
+    image-rendering: pixelated;
+
+    transform: translateX(-50%);
 }

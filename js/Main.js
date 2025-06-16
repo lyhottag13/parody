@@ -31,4 +31,4 @@ setInterval(() => {
     if (holdingRight) {
         bear.style.left = (Number.parseInt(bear.style.left.replace("px", "")) + 10) + "px";
     }
-}, 20)
+}, 20);
