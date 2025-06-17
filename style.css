@@ -23,8 +23,11 @@ body {
     transform: translateX(-50%);
 }
 
-canvas {
+#background {
     image-rendering: pixelated;
-    height: 512px;
-    width: 512px;
+    image-rendering: crisp-edges;
+}
+#canvas {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
 }
