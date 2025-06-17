@@ -22,3 +22,9 @@ body {
 
     transform: translateX(-50%);
 }
+
+canvas {
+    image-rendering: pixelated;
+    height: 512px;
+    width: 512px;
+}

@@ -1,34 +1,73 @@
-const bear = document.getElementById("bear");
-bear.style.left = "500px";
+const canvas = document.getElementById("canvas");
+const context = canvas.getContext("2d");
 
-let holdingLeft = false;
-let holdingRight = false;
+context.imageSmoothingEnabled = false;
 
-document.addEventListener("keydown", action => {
-    switch (action.key) {
-        case "a":
-            holdingLeft = true;
-            break;
-        case "d":
-            holdingRight = true;
-            break;
+const GRAVITY = 0.001;
+const FRICTION = -0.001;
+
+canvas.style.background = "white";
+
+const WINDOW_HEIGHT = window.innerHeight;
+const WINDOW_WIDTH = window.innerWidth;
+
+// canvas.height = WINDOW_HEIGHT;
+// canvas.width = WINDOW_WIDTH;
+
+
+class Sprite {
+    constructor(xpos, ypos, speedX, speedY, spritePath) {
+        this.xpos = xpos;
+        this.ypos = ypos;
+        this.speedX = speedX;
+        this.speedY = speedY;
+        this.spritePath = spritePath;
     }
-});
-document.addEventListener("keyup", action => {
-    switch (action.key) {
-        case "a":
-            holdingLeft = false;
-            break;
-        case "d":
-            holdingRight = false;
-            break;
+    drawImage(context) {
+        context.drawImage(this.spritePath, this.xpos, this.ypos, 32, 32);    
     }
-});
-setInterval(() => {
-    if (holdingLeft) {
-        bear.style.left = (Number.parseInt(bear.style.left.replace("px", "")) - 10) + "px";
+    update(delta) {
+        context.clearRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+        this.speedY += GRAVITY * delta;
+        
+        this.xpos += this.speedX * delta;
+        this.ypos += this.speedY * delta;
+        
+        if (this.ypos >= 70) {
+            this.spritePath = image2;
+            this.ypos = 70;
+            this.speedX += FRICTION * delta;
+            if (this.speedX <= 0) {
+                this.speedX = 0;
+            }
+        }
+        
+        this.drawImage(context);
     }
-    if (holdingRight) {
-        bear.style.left = (Number.parseInt(bear.style.left.replace("px", "")) + 10) + "px";
+    bounce() {
+        this.speedY = -this.speedY * .5;
     }
-}, 20);
+}
+
+const image1 = new Image();
+const image2 = new Image();
+
+
+image1.src = "resources/images/flying.png";
+image2.src = "resources/images/floored.png";
+
+const sprite = new Sprite(10, 50, 0.09, -0.3, image1);
+
+sprite.drawImage(context);
+
+let lastTime = 0;
+
+function updateCanvas(timestamp) {
+    const delta = timestamp - lastTime;
+    lastTime = timestamp;
+
+    sprite.update(delta);
+    requestAnimationFrame(updateCanvas);
+}
+
+requestAnimationFrame(updateCanvas);
