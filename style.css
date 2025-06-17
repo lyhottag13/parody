@@ -31,3 +31,8 @@ body {
     image-rendering: pixelated;
     image-rendering: crisp-edges;
 }
+
+#you {
+    opacity: 0;
+    transition: all 2s ease;
+}

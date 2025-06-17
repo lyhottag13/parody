@@ -42,6 +42,9 @@ class Sprite {
         this.xpos += this.xvel * delta;
         
         if (this.ypos >= 300) {
+            setTimeout(() => {
+                document.getElementById("you").style.opacity = 1;
+            }, 2000);
             context.clearRect(0, 0, 32, 32);
             context.drawImage(image4, 0, 0);
             this.ypos = 300;
